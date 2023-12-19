@@ -30,7 +30,7 @@ def bits_to_file(bits, output_file):
 
 video_file = 'output_video.mp4'  # Pfad zum Video
 output_file = 'output_file.txt'  # Ausgabedatei
-fps = 25  # Bildrate des Videos
+fps = 25  # Bildrate des Video
 
 bits = video_to_bits(video_file, 1920, 1080, fps)
 bits_to_file(bits, output_file)
