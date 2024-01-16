@@ -23,14 +23,26 @@ def create_image_from_bits(bits, width, height):
     return image
 
 
-def create_video_from_bits(bits, width, height, video_file, frame_rate, frame_count):
+def create_video_from_bits(bits, width, height, video_file, frame_rate, scale_factor):
+    # Neue Frame-Größe berechnen
+    scaled_width = int(width * scale_factor)
+    scaled_height = int(height * scale_factor)
+
+    # Anzahl der Frames anpassen
+    scaled_frame_count = round(len(bits) / (scaled_width * scaled_height) + 0.5)
+
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     video_writer = cv2.VideoWriter(video_file, fourcc, frame_rate, (width, height), False)
-    total_bits = width * height * frame_count
-    for i in range(0, total_bits, width * height):
-        frame_bits = bits[i:i + width * height]
-        frame = create_image_from_bits(frame_bits, width, height)
-        video_writer.write(frame)
+
+    total_bits = scaled_width * scaled_height * scaled_frame_count
+    for i in range(0, total_bits, scaled_width * scaled_height):
+        frame_bits = bits[i:i + scaled_width * scaled_height]
+        frame = create_image_from_bits(frame_bits, scaled_width, scaled_height)
+
+        # Skalieren Sie das Frame zurück auf die ursprüngliche Größe
+        resized_frame = cv2.resize(frame, (width, height), interpolation=cv2.INTER_NEAREST)
+
+        video_writer.write(resized_frame)
     video_writer.release()
 
 
@@ -48,4 +60,4 @@ print(frame_count)
 
 # Create the video
 video_file = 'output_video.mp4'
-create_video_from_bits(bits, width, height, video_file, frame_rate, frame_count)
+create_video_from_bits(bits, width, height, video_file, frame_rate, 0.25)
