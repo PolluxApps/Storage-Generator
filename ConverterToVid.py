@@ -39,25 +39,25 @@ def create_video_from_bits(bits, width, height, video_file, frame_rate, scale_fa
         frame_bits = bits[i:i + scaled_width * scaled_height]
         frame = create_image_from_bits(frame_bits, scaled_width, scaled_height)
 
-        # Skalieren Sie das Frame zurück auf die ursprüngliche Größe
+        #Skalieren des Frames auf die Ursprüngliche größe
         resized_frame = cv2.resize(frame, (width, height), interpolation=cv2.INTER_NEAREST)
 
         video_writer.write(resized_frame)
     video_writer.release()
 
 
-# Convert file to bits
+# Convertiere Files zu Bits 
 file_path = '100MB.bin'
 bits = file_to_bits(file_path)
 
-# Parameters for video
+# Parameter für das video 
 width, height = 1920, 1080
 frame_rate = 60# Frames per second, adjust as needed
-# Calculate
-frame_count = round(len(bits) / (width * height) + 0.5)  # Number of frames to generate, adjust as needed
+# Berechnen der Frames 
+frame_count = round(len(bits) / (width * height) + 0.5)  # Anzahl der gebrauchten Frames
 
 print(frame_count)
 
-# Create the video
+# Video erstellen und speichern
 video_file = 'output_video.mp4'
 create_video_from_bits(bits, width, height, video_file, frame_rate, 0.25)
