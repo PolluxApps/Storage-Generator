@@ -47,12 +47,12 @@ def create_video_from_bits(bits, width, height, video_file, frame_rate, scale_fa
 
 
 # Convert file to bits
-file_path = '100MB.bin'
+file_path = 'file.txt'
 bits = file_to_bits(file_path)
 
 # Parameters for video
 width, height = 1920, 1080
-frame_rate = 60# Frames per second, adjust as needed
+frame_rate = 60  # Frames per second, adjust as needed
 # Calculate
 frame_count = round(len(bits) / (width * height) + 0.5)  # Number of frames to generate, adjust as needed
 
