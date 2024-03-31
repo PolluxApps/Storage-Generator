@@ -47,7 +47,7 @@ def create_video_from_bits(bits, width, height, video_file, frame_rate, scale_fa
 
 
 # Convert file to bits
-file_path = ('file.txt')
+file_path = ('short.txt')
 bits = file_to_bits(file_path)
 
 # Parameters for video

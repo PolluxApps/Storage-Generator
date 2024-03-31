@@ -1,6 +1,5 @@
 import cv2
 
-
 def bits_to_file(video_file, output_file_path, width, height, scale_factor):
     # Video öffnen
     video_reader = cv2.VideoCapture(video_file)
